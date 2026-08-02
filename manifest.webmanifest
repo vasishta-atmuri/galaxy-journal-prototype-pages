@@ -1,0 +1,19 @@
+{
+  "name": "Galaxy Journal Prototype",
+  "short_name": "Galaxy Journal",
+  "description": "A local-first Galaxy journal prototype for private capture and reflection.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2eee6",
+  "theme_color": "#121416",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
