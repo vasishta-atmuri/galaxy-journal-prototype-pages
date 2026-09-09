@@ -1,47 +1,12 @@
-const CACHE_NAME = "galaxy-journal-shell-v2";
-
-function fromScope(path) {
-  return new URL(path, self.registration.scope).toString();
-}
-
-const SHELL_ASSETS = [
-  fromScope("./"),
-  fromScope("manifest.webmanifest"),
-  fromScope("favicon.svg"),
-];
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.addAll(SHELL_ASSETS))
-      .catch(() => undefined),
-  );
-});
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter((key) => key !== CACHE_NAME)
-            .map((key) => caches.delete(key)),
-        ),
-      )
-      .then(() => self.clients.claim()),
-  );
-});
-
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") {
-    return;
-  }
-
-  if (!event.request.url.startsWith(self.registration.scope)) {
-    return;
-  }
-
-  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+const CACHE='journal-shell-4c65af0d21f6';
+const ASSETS=["./","./index.html","./icon.svg","./icon-192.png","./icon-512.png","./manifest.webmanifest","./assets/index-dJ6BgOvx.js","./assets/index-Dg7zz9be.css"];
+const URLS=new Set(ASSETS.map(p=>new URL(p,self.registration.scope).href));
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('journal-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{
+ const req=event.request,url=new URL(req.url);
+ if(req.method!=='GET'||url.origin!==self.location.origin)return;
+ if(req.mode==='navigate'){event.respondWith(fetch(req).catch(()=>caches.match(new URL('./index.html',self.registration.scope)).then(r=>r||Response.error())));return;}
+ if(!URLS.has(url.href))return;
+ event.respondWith(caches.match(req).then(hit=>hit||fetch(req)));
 });
