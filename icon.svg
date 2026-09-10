@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="44" fill="#185846"/><path d="M56 48h63a17 17 0 0 1 17 17v80H68a12 12 0 0 1-12-12V48Z" fill="none" stroke="#fff" stroke-width="9"/><path d="M77 49v95m17-67h23m-23 21h23" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+ <defs><linearGradient id="sky" x2="1" y2="1"><stop stop-color="#133555"/><stop offset=".5" stop-color="#252450"/><stop offset="1" stop-color="#100e25"/></linearGradient><radialGradient id="halo"><stop stop-color="#77bfed" stop-opacity=".6"/><stop offset="1" stop-color="#77bfed" stop-opacity="0"/></radialGradient><linearGradient id="glass" x2=".8" y2="1"><stop stop-color="#e5f7ff" stop-opacity=".55"/><stop offset=".5" stop-color="#9ac9ff" stop-opacity=".18"/><stop offset="1" stop-color="#c8b6ef" stop-opacity=".35"/></linearGradient><linearGradient id="edge" x2="1" y2="1"><stop stop-color="#f1fbff"/><stop offset="1" stop-color="#c0c2ff" stop-opacity=".5"/></linearGradient></defs>
+ <rect width="192" height="192" rx="44" fill="url(#sky)"/><circle cx="54" cy="40" r="110" fill="url(#halo)"/>
+ <rect x="2" y="2" width="188" height="188" rx="42" fill="none" stroke="#e5f2ff" stroke-opacity=".24"/>
+ <g fill="#dde9ff"><circle cx="36" cy="49" r="1.5"/><circle cx="148" cy="44" r="1.4"/><circle cx="159" cy="144" r="1"/><circle cx="29" cy="122" r="1"/></g>
+ <path d="M57 43h63q18 0 18 18v87H66q-12 0-12-12V48q0-5 3-5Z" fill="url(#glass)" stroke="url(#edge)" stroke-width="2.5"/>
+ <path d="M70 46v91M57 139q4-5 11-5h66" fill="none" stroke="#eff8ff" stroke-opacity=".66" stroke-width="2.5"/>
+ <ellipse cx="108" cy="86" rx="34" ry="12" transform="rotate(-29 108 86)" fill="none" stroke="#d5ddff" stroke-width="2"/>
+ <path d="m108 61 5 18 18 6-18 5-5 18-5-18-18-5 18-6Z" fill="#f3faff"/>
+ <path d="M84 119h34" stroke="#d8e7ff" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+</svg>
