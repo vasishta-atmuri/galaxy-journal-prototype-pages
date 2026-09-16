@@ -1,5 +1,5 @@
-const CACHE='journal-shell-bb38133152de';
-const ASSETS=["./","./index.html","./icon.svg","./icon-192.png","./icon-512.png","./manifest.webmanifest","./assets/index-4bpYgjyr.js","./assets/web-BtoXJMj2.js","./assets/web-CJlLfGNS.js","./assets/web-D7QlTeo4.js","./assets/web-StaGb1dY.js","./assets/index-I2IAJZXf.css"];
+const CACHE='journal-shell-3182f3eaa9ea';
+const ASSETS=["./","./index.html","./icon.svg","./icon-192.png","./icon-512.png","./manifest.webmanifest","./assets/index-DjLbF-EF.js","./assets/web-B5dQbpGR.js","./assets/web-B6mCusyI.js","./assets/web-Bb7PiQgI.js","./assets/web-BlwI5SLF.js","./assets/index-I2IAJZXf.css"];
 const URLS=new Set(ASSETS.map(p=>new URL(p,self.registration.scope).href));
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('journal-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
