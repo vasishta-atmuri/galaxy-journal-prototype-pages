@@ -1,6 +1,6 @@
-# Upgrade your existing Windows receiver for incremental sync
+# Upgrade your Windows receiver to 1.2.0
 
-Update the receiver **before** installing the new incremental-sync APK.
+Update the receiver **before** installing the new APK. Receiver 1.2.0 accepts device manufacturer/model, Android version/API and reported local-AI readiness. Receiver 1.1.0 rejects the new fields; data stays on the phone until upgraded. No database reset or new tunnel is required.
 
 Downloads: [Receiver ZIP](https://vasishta-atmuri.github.io/galaxy-journal-prototype-pages/galaxy-journal-research-laptop.zip) · [Latest APK](https://vasishta-atmuri.github.io/galaxy-journal-prototype-pages/galaxy-journal.apk). The new receiver continues accepting APK 1.0.126's full snapshots, so existing testers can keep using that APK during the upgrade. The new APK waits/retries if it reaches an older receiver; it does not fall back to full-history uploads.
 
@@ -55,13 +55,14 @@ Both must show:
 ok           : True
 protocol     : journal-backup-1
 syncProtocol : journal-sync-2
+deviceMetadata : device-environment-1
 ```
 
-The old protocol field remains for older APKs. **The new syncProtocol field confirms you are running the incremental receiver.** Health exposes no private rows and does not prove an authenticated phone upload.
+The old protocol field remains for older APKs. **deviceMetadata: device-environment-1 confirms the device-metadata update is running; syncProtocol alone is insufficient.** Health exposes no private rows and does not prove an authenticated phone upload.
 
 ## 4. Update the phone and confirm receipt
 
-Install the latest signed APK over the existing app, preserving its data and Knox ID. Open Journal while the laptop and tunnel are running. Under Settings → App & data → Help shape Journal → Analytics sync, use **Retry sync now** once to confirm a successful receipt without waiting for the automatic window.
+Install the latest signed APK over the existing app, preserving its data and Knox ID. Open Journal while the laptop and tunnel are running. Under Settings → App & data → Beta analytics, use **Sync now** once to confirm a successful receipt without waiting for the automatic window.
 
 For a phone whose history is already on the laptop, the new client starts at the laptop's acknowledged cursor and sends only newer events. A new installation or lost laptop database sends retained history in bounded batches. Each batch contains at most 500 new events; a bounded burst drains the backlog. Large backlogs can span later sync windows. No local events are deleted after acknowledgment.
 
@@ -85,3 +86,7 @@ If a check fails, keep the receiver stopped and preserve the printed backup path
 After restoring older/empty server data, the new client detects the server cursor on its next eligible foreground check or manual retry and resends only the missing tail. It re-enrolls the saved installation credential if registration is absent. A conflicting or newer server history is retained and surfaced for review, never silently overwritten.
 
 This helper and protocol are tested with isolated fixtures on macOS/Node 24; actual PowerShell execution, Windows upgrade and physical-phone receipt remain checks for your PC/phone. No test participant is sent to your real database.
+
+## Device and local-AI analysis
+
+Run `npm.cmd run report` in the receiver folder. Open `readiness.csv` in the report directory printed by the command. Each reported readiness row now includes deviceManufacturer, deviceModel, androidVersion, androidApi and platform when available, alongside localAI. Older rows remain blank for device fields. Available is the SDK readiness state, not proof of successful generation; inspect provider=nano AI action/task outcomes for actual use. Model name alone does not establish compatibility.
