@@ -1,5 +1,5 @@
-const CACHE='journal-shell-bb3ea9c4c0a8';
-const ASSETS=["./","./index.html","./icon-32.png","./icon-180.png","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./journal-hero.webp","./manifest.webmanifest","./assets/index-Bujk_il-.js","./assets/web-B5D3UtrS.js","./assets/web-BdNr3GXK.js","./assets/web-CM6GRfML.js","./assets/web-DonhVHzy.js","./assets/index-BqYFS33W.css"];
+const CACHE='journal-shell-61f89fd4cc2c';
+const ASSETS=["./","./index.html","./icon-32.png","./icon-180.png","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./journal-hero.webp","./manifest.webmanifest","./assets/index-B7PaJXLu.js","./assets/web-BehlfMr-.js","./assets/web-C1fuXdpy.js","./assets/web-CxxU0DxL.js","./assets/web-XT5ZyLdq.js","./assets/index-3TZcSP6n.css"];
 const URLS=new Set(ASSETS.map(p=>new URL(p,self.registration.scope).href));
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('journal-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
